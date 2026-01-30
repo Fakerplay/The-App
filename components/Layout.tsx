@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useNavigation, Page } from '../context/NavigationContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Settings } from 'lucide-react';
 import { SettingsPanel } from './ui/SettingsPanel';
@@ -47,7 +48,14 @@ const AmbientBackground = () => {
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { colors, isDimmed } = useTheme();
+  const { currentPage, navigateTo } = useNavigation();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const navItems: { id: Page; label: string }[] = [
+    { id: 'landing', label: 'Product' },
+    { id: 'branding', label: 'Vision' },
+    { id: 'design', label: 'Design' },
+  ];
 
   return (
     <div className={`w-full min-h-screen transition-colors duration-1000 ease-in-out ${colors.background} overflow-x-hidden relative`}>
@@ -65,7 +73,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
       {/* Navbar - Absolute positioning to scroll away */}
       <nav className="absolute top-0 left-0 w-full z-[60] px-6 py-6 md:px-12 md:py-8 flex justify-between items-start text-white mix-blend-difference pointer-events-none max-w-[1440px] left-1/2 -translate-x-1/2"> 
-          <div className="pointer-events-auto flex flex-col items-start gap-1">
+          <div className="pointer-events-auto flex flex-col items-start gap-1 cursor-pointer" onClick={() => navigateTo('landing')}>
              <div className="flex items-center gap-3">
                <div className="relative z-10 text-white">
                  <SolaceLogo />
@@ -76,6 +84,19 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
           
           <div className="pointer-events-auto flex gap-6 items-center">
+              {/* Desktop Navigation Links */}
+              <div className="hidden md:flex items-center gap-6 mr-4 border-r border-white/20 pr-6">
+                {navItems.map((item) => (
+                  <button 
+                    key={item.id}
+                    onClick={() => navigateTo(item.id)}
+                    className={`font-mono text-[10px] tracking-widest uppercase transition-opacity ${currentPage === item.id ? 'opacity-100 border-b border-white' : 'opacity-50 hover:opacity-80'}`}
+                  >
+                     {item.label}
+                  </button>
+                ))}
+              </div>
+
               <button 
                 onClick={() => setIsSettingsOpen(true)}
                 className="flex items-center gap-2 group hover:opacity-80 transition-opacity"

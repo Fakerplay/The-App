@@ -51,7 +51,7 @@ const LANDING_THEME: ThemeColors = {
   border: 'border-[#E5E5E5]'
 };
 
-export const ThemeProvider = ({ children }: { children?: ReactNode }) => {
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>(TimeOfDay.MORNING);
   const [isDimmed, setDimmed] = useState(false);
   const [fontSize, setFontSize] = useState<FontSize>('medium');

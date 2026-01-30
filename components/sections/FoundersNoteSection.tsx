@@ -7,7 +7,7 @@ export const FoundersNoteSection: React.FC = () => {
   const { colors, spacing } = useTheme();
 
   return (
-    <section className={`w-full ${spacing.sectionPy} px-6 ${colors.background} border-b ${colors.border} transition-colors duration-500 flex justify-center`}>
+    <section className={`w-full ${spacing.sectionPy} ${spacing.sectionPx} ${colors.background} border-b ${colors.border} transition-colors duration-500 flex justify-center`}>
       <div className="max-w-2xl w-full">
         
         <div className="flex flex-col items-center text-center mb-12">

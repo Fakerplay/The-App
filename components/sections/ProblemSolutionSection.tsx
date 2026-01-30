@@ -7,11 +7,11 @@ export const ProblemSolutionSection: React.FC = () => {
   const { colors, spacing } = useTheme();
 
   return (
-    <section className={`w-full min-h-[80vh] flex flex-col md:flex-row relative ${colors.background} border-b ${colors.border} transition-colors duration-500`}>
+    <section className={`w-full min-h-[80vh] grid grid-cols-1 md:grid-cols-2 relative ${colors.background} border-b ${colors.border} transition-colors duration-500`}>
       
       {/* Left Column: The Problem (Burnout) */}
-      <div className={`w-full md:w-1/2 p-8 md:p-12 lg:p-20 border-b md:border-b-0 md:border-r ${colors.border} flex flex-col justify-center`}>
-        <div className="max-w-md mx-auto md:mr-12">
+      <div className={`grid content-center ${spacing.sectionPx} py-20 border-b md:border-b-0 md:border-r ${colors.border}`}>
+        <div className="max-w-xl w-full justify-self-center md:justify-self-start">
             <TechnicalMono className="mb-6 text-red-500/70">01 // THE DIAGNOSIS</TechnicalMono>
             <h2 className={`font-sans text-3xl md:text-5xl font-light mb-8 ${colors.textPrimary} tracking-tight leading-[1.1]`}>
               Digital Burnout. <br/>
@@ -34,11 +34,11 @@ export const ProblemSolutionSection: React.FC = () => {
       </div>
 
       {/* Right Column: The Solution (Solace) */}
-      <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-20 flex flex-col justify-center relative overflow-hidden">
+      <div className={`grid content-center ${spacing.sectionPx} py-20 relative overflow-hidden`}>
         {/* Subtle background glow */}
         <div className="absolute inset-0 bg-solace-cyan/5 opacity-50 pointer-events-none" />
         
-        <div className="max-w-md mx-auto md:ml-12 relative z-10">
+        <div className="max-w-xl w-full justify-self-center md:justify-self-end relative z-10">
             <TechnicalMono className="mb-6 text-solace-cyan">02 // THE CURE</TechnicalMono>
             <h2 className={`font-sans text-3xl md:text-5xl font-light mb-8 ${colors.textPrimary} tracking-tight leading-[1.1]`}>
               The Pause. <br/>

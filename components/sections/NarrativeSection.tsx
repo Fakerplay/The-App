@@ -115,10 +115,10 @@ export const NarrativeSection: React.FC = () => {
   }, [isInView, setDimmed]);
 
   return (
-    <section ref={ref} className={`w-full min-h-[100vh] flex flex-col md:flex-row relative ${colors.background} overflow-hidden border-b ${colors.border} transition-colors duration-500`}>
+    <section ref={ref} className={`w-full min-h-[100vh] grid grid-cols-1 md:grid-cols-2 relative ${colors.background} border-b ${colors.border} transition-colors duration-500`}>
       
       {/* Left Side: The Noise */}
-      <div className={`w-full md:w-1/2 min-h-[50vh] md:h-auto bg-[#F0F0F0] relative overflow-hidden border-r ${colors.border}`}>
+      <div className={`w-full h-[50vh] md:h-auto bg-[#F0F0F0] relative overflow-hidden border-b md:border-b-0 md:border-r ${colors.border}`}>
         <NoiseTexture />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F0F0F0]/30 to-[#F0F0F0]" />
         
@@ -136,10 +136,10 @@ export const NarrativeSection: React.FC = () => {
       </div>
 
       {/* Right Side: The Silence */}
-      <div className={`w-full md:w-1/2 min-h-[50vh] md:h-auto ${colors.background} flex flex-col items-center justify-center ${spacing.sectionPx} py-12 text-center relative z-10 transition-colors duration-500`}>
+      <div className={`w-full h-[50vh] md:h-auto grid content-center justify-items-center ${spacing.sectionPx} py-12 relative z-10 transition-colors duration-500`}>
         <motion.div
            style={{ y }}
-           className="max-w-xl relative flex flex-col items-center"
+           className="max-w-xl relative flex flex-col items-center text-center"
         >
            <span className="absolute -top-16 -left-8 font-serif text-9xl text-black/5 select-none leading-none opacity-20">“</span>
            
