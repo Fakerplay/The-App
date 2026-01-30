@@ -37,9 +37,9 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full flex justify-center mb-8"
         >
-           <TechnicalMono className="text-solace-cyan tracking-[0.2em] text-center border border-solace-cyan/30 px-3 py-1 rounded-full bg-solace-cyan/5 backdrop-blur-sm">
-             PROJECT SILENCE_01
-           </TechnicalMono>
+          <div className="font-mono text-[#00f2ff] tracking-[0.2em] text-center border border-[#00f2ff]/30 px-4 py-1.5 rounded-full bg-[#00f2ff]/10 backdrop-blur-sm text-[10px] uppercase">
+  PROJECT SILENCE_01
+</div>
         </motion.div>
 
         <motion.div
