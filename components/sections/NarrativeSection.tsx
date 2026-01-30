@@ -14,7 +14,6 @@ const NoiseTexture = () => {
     "PAYMENT DUE", "CONFIRM", "VERIFY", "PASSWORD", "LOGIN"
   ];
 
-  // Generate stable random values for chaotic distribution
   const elements = useMemo(() => {
     return Array.from({ length: 150 }).map((_, i) => ({
       word: words[i % words.length],
@@ -54,8 +53,6 @@ const NoiseTexture = () => {
           {el.word}
         </motion.span>
       ))}
-      
-      {/* Vignette Overlay to contain the chaos */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#F0F0F0_100%)] mix-blend-normal" />
     </div>
   );
@@ -78,14 +75,14 @@ const SystemStatus: React.FC = () => {
   }, []);
 
   return (
-    <div className="mt-16 flex items-center gap-3 justify-center">
+    <div className="mt-16 flex items-center gap-3 justify-center w-full">
       <div className="relative flex h-2 w-2">
         <motion.div
           animate={{ scale: [1, 2.5, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inline-flex h-full w-full rounded-full bg-emerald-500"
+          className="absolute inline-flex h-full w-full rounded-full bg-solace-cyan"
         />
-        <div className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+        <div className="relative inline-flex rounded-full h-2 w-2 bg-solace-cyan" />
       </div>
       <div className="w-32 text-left h-4 relative">
         <AnimatePresence mode="wait">
@@ -97,7 +94,7 @@ const SystemStatus: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <TechnicalMono className="text-[10px] !text-emerald-900/70 tracking-widest">{states[index]}</TechnicalMono>
+            <TechnicalMono className="text-[10px] !text-black/70 tracking-widest">{states[index]}</TechnicalMono>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -118,26 +115,23 @@ export const NarrativeSection: React.FC = () => {
   }, [isInView, setDimmed]);
 
   return (
-    <section ref={ref} className={`w-full min-h-[100vh] flex flex-col md:flex-row relative ${colors.background} overflow-hidden transition-colors duration-500`}>
+    <section ref={ref} className={`w-full min-h-[100vh] flex flex-col md:flex-row relative ${colors.background} overflow-hidden border-b ${colors.border} transition-colors duration-500`}>
       
       {/* Left Side: The Noise */}
-      <div className="w-full md:w-1/2 min-h-[50vh] md:h-auto bg-[#F0F0F0] relative overflow-hidden border-r border-black/5">
+      <div className={`w-full md:w-1/2 min-h-[50vh] md:h-auto bg-[#F0F0F0] relative overflow-hidden border-r ${colors.border}`}>
         <NoiseTexture />
-        
-        {/* Gradient Overlay for Depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F0F0F0]/30 to-[#F0F0F0]" />
         
-        {/* Central visual for Noise - Abstract blurred core */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div 
               animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
               transition={{ duration: 0.2, repeat: Infinity, repeatType: "reverse" }}
-              className="w-48 h-48 md:w-64 md:h-64 bg-red-500/5 rounded-full blur-[80px]" 
+              className="w-48 h-48 md:w-64 md:h-64 bg-solace-cyan/5 rounded-full blur-[80px]" 
             />
         </div>
 
         <div className="absolute bottom-12 left-12 z-10">
-           <TechnicalMono className="text-black/60 bg-[#F0F0F0]/80 backdrop-blur-sm px-3 py-1.5 border border-black/5 rounded-full">FIG A. THE NOISE</TechnicalMono>
+           <TechnicalMono className={`text-black/60 bg-[#F0F0F0]/80 backdrop-blur-sm px-3 py-1.5 border ${colors.border} rounded-full`}>FIG A. THE NOISE</TechnicalMono>
         </div>
       </div>
 
@@ -147,24 +141,26 @@ export const NarrativeSection: React.FC = () => {
            style={{ y }}
            className="max-w-xl relative flex flex-col items-center"
         >
-           {/* Decorative Quotes */}
-           <span className="absolute -top-16 -left-8 font-serif text-9xl text-black/5 select-none leading-none">“</span>
+           <span className="absolute -top-16 -left-8 font-serif text-9xl text-black/5 select-none leading-none opacity-20">“</span>
            
-           <div className="relative z-10">
+           <div className="relative z-10 flex flex-col items-center w-full">
                <TechnicalMono className="mb-6 opacity-40">THE PHILOSOPHY</TechnicalMono>
-               <DisplaySerif className="leading-tight mb-8">
+               <DisplaySerif className="leading-tight mb-8 text-center">
                  We prefer to listen to <br className="hidden md:block" /> what you don't say.
                </DisplaySerif>
-               <p className={`font-sans text-lg max-w-sm mx-auto leading-relaxed ${colors.textPrimary} opacity-60`}>
-                 In an age of constant extraction, Solace offers a sanctuary of privacy and presence.
-               </p>
+               
+               <div className="max-w-sm w-full border-l-2 border-solace-cyan/30 pl-6 py-1">
+                 <p className={`font-sans text-lg leading-relaxed ${colors.textPrimary} opacity-60 text-left`}>
+                   In an age of constant extraction, Solace offers a sanctuary of privacy and presence.
+                 </p>
+               </div>
            </div>
 
            <SystemStatus />
         </motion.div>
 
         <div className="absolute bottom-12 right-12 text-right">
-           <TechnicalMono className="text-black/40 px-3 py-1.5 border border-black/5 rounded-full">FIG B. THE SIGNAL</TechnicalMono>
+           <TechnicalMono className={`text-black/40 px-3 py-1.5 border ${colors.border} rounded-full`}>FIG B. THE SIGNAL</TechnicalMono>
         </div>
       </div>
 

@@ -34,11 +34,11 @@ const THEMES: Record<TimeOfDay, ThemeColors> = {
     border: 'border-[#C0C0C0]'
   },
   [TimeOfDay.NIGHT]: {
-    background: 'bg-[#0A0A0A]',
-    textPrimary: 'text-[#E5E5E5]',
-    textSecondary: 'text-[#888888]',
+    background: 'bg-[#050505]', // Deeper black for better contrast
+    textPrimary: 'text-[#FAFAFA]', // Brighter white for better readability
+    textSecondary: 'text-[#A0A0A0]', // Increased contrast for secondary text
     accent: 'text-white',
-    border: 'border-[#333333]'
+    border: 'border-[#2A2A2A]' // Subtle but visible border
   }
 };
 
@@ -78,7 +78,7 @@ export const ThemeProvider = ({ children }: { children?: ReactNode }) => {
   const spacing = useMemo(() => {
     return layoutDensity === 'compact' 
       ? { sectionPy: 'py-16 md:py-20', sectionPx: 'px-6 md:px-8' }
-      : { sectionPy: 'py-32 md:py-40', sectionPx: 'px-8 md:px-12 lg:px-24' };
+      : { sectionPy: 'py-24 md:py-32', sectionPx: 'px-6 md:px-12 lg:px-24' }; // Optimized for mobile
   }, [layoutDensity]);
 
   return (

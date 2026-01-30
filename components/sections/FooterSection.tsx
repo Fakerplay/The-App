@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { DisplaySerif, TechnicalMono } from '../ui/Typography';
 import { ArrowRight, Lock } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
@@ -50,6 +50,13 @@ export const FooterSection: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
   const isValid = email.includes('@') && email.includes('.');
 
+  // Helper to extract hex color
+  const getHexColor = (bgClass: string) => {
+    const match = bgClass.match(/#([0-9a-fA-F]{6})/);
+    return match ? `#${match[1]}` : 'transparent';
+  };
+  const bgHex = getHexColor(colors.background);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
@@ -58,12 +65,15 @@ export const FooterSection: React.FC = () => {
   };
 
   return (
-    <footer className={`w-full ${spacing.sectionPy} px-6 ${colors.background} flex flex-col items-center justify-center text-center border-t border-black/5 relative overflow-hidden transition-colors duration-500`}>
+    <footer className={`w-full ${spacing.sectionPy} px-6 ${colors.background} flex flex-col items-center justify-center text-center relative overflow-hidden transition-colors duration-500`}>
       
       {/* Background Gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-t ${colors.background.replace('bg-', 'from-')} to-transparent pointer-events-none opacity-50`} />
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{ background: `linear-gradient(to top, ${bgHex}, transparent)` }}
+      />
 
-      <div className="relative z-10 flex flex-col items-center max-w-2xl w-full">
+      <div className="relative z-10 flex flex-col items-center max-w-2xl w-full mb-12">
         {/* The Pattern Block */}
         <PatternBlock />
 
@@ -83,7 +93,7 @@ export const FooterSection: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === 'success'}
-              className={`w-full bg-black/5 border border-black/5 py-4 px-6 font-mono text-sm ${colors.textPrimary} placeholder-black/30 focus:outline-none focus:border-black/20 focus:bg-white transition-all duration-300 rounded-sm`}
+              className={`w-full bg-black/5 border ${colors.border} py-4 px-6 font-mono text-sm ${colors.textPrimary} placeholder-black/30 focus:outline-none focus:border-solace-cyan/40 focus:bg-white transition-all duration-300 rounded-sm text-center`}
             />
             <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-30">
               <Lock size={14} className={colors.textPrimary} />
@@ -98,7 +108,7 @@ export const FooterSection: React.FC = () => {
               status === 'success' 
                 ? 'bg-green-600 text-white border-transparent' 
                 : isValid 
-                  ? `${colors.background === 'bg-[#0A0A0A]' ? 'bg-white text-black hover:bg-white/90' : 'bg-[#1A1A1A] text-white hover:bg-black'}` 
+                  ? 'bg-solace-cyan text-black hover:opacity-90 shadow-[0_0_15px_rgba(0,209,255,0.3)] border-transparent' 
                   : 'bg-transparent text-black/30 border border-black/10 cursor-not-allowed'
             }`}
           >
@@ -113,11 +123,13 @@ export const FooterSection: React.FC = () => {
             )}
           </motion.button>
         </form>
+      </div>
 
-        <div className="mt-40 flex gap-12 border-t border-black/5 pt-8 opacity-60">
-          <TechnicalMono className="opacity-50 hover:opacity-100 cursor-pointer transition-opacity">PRIVATE BY DESIGN</TechnicalMono>
-          <TechnicalMono className="opacity-50 hover:opacity-100 cursor-pointer transition-opacity">QUIET BY CHOICE</TechnicalMono>
-          <TechnicalMono className="opacity-50 hover:opacity-100 cursor-pointer transition-opacity">© 2024 SOLACE</TechnicalMono>
+      <div className="relative z-10 flex flex-col items-center max-w-2xl w-full">
+        <div className={`mt-12 flex flex-col md:flex-row gap-6 md:gap-12 border-t ${colors.border} pt-8 opacity-60 text-center md:text-left`}>
+          <TechnicalMono className="opacity-50 hover:text-solace-cyan cursor-pointer transition-colors">PRIVATE BY DESIGN</TechnicalMono>
+          <TechnicalMono className="opacity-50 hover:text-solace-cyan cursor-pointer transition-colors">QUIET BY CHOICE</TechnicalMono>
+          <TechnicalMono className="opacity-50 hover:text-solace-cyan cursor-pointer transition-colors">© 2026 SOLACE by Shubham Shinde</TechnicalMono>
         </div>
       </div>
 
