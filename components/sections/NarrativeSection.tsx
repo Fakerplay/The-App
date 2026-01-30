@@ -75,7 +75,7 @@ const SystemStatus: React.FC = () => {
   }, []);
 
   return (
-    <div className="mt-16 flex items-center gap-3 justify-center w-full">
+    <div className="mt-16 flex items-center gap-3 w-full opacity-60">
       <div className="relative flex h-2 w-2">
         <motion.div
           animate={{ scale: [1, 2.5, 1], opacity: [0.5, 0, 0.5] }}
@@ -136,17 +136,17 @@ export const NarrativeSection: React.FC = () => {
       </div>
 
       {/* Right Side: The Silence */}
-      <div className={`w-full h-[50vh] md:h-auto grid content-center justify-items-center ${spacing.sectionPx} py-12 relative z-10 transition-colors duration-500`}>
+      <div className={`w-full h-[50vh] md:h-auto grid content-center ${spacing.sectionPx} py-12 relative z-10 transition-colors duration-500`}>
         <motion.div
            style={{ y }}
-           className="max-w-xl relative flex flex-col items-center text-center"
+           className="max-w-xl w-full justify-self-center md:justify-self-start md:pl-12 relative flex flex-col items-start text-left"
         >
            <span className="absolute -top-16 -left-8 font-serif text-9xl text-black/5 select-none leading-none opacity-20">“</span>
            
-           <div className="relative z-10 flex flex-col items-center w-full">
+           <div className="relative z-10 flex flex-col items-start w-full">
                <TechnicalMono className="mb-6 opacity-40">THE PHILOSOPHY</TechnicalMono>
-               <DisplaySerif className="leading-tight mb-8 text-center">
-                 We prefer to listen to <br className="hidden md:block" /> what you don't say.
+               <DisplaySerif className="leading-tight mb-8">
+                 We listen to what <br/> isn't said.
                </DisplaySerif>
                
                <div className="max-w-sm w-full border-l-2 border-solace-cyan/30 pl-6 py-1">

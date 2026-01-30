@@ -10,14 +10,16 @@ const SolaceLogo = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
     <motion.g 
       animate={{ rotate: 360 }}
-      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       className="origin-center"
     >
-      <path d="M12 12L12 4C14.2091 4 16 5.79086 16 8C16 10.2091 14.2091 12 12 12Z" fill="currentColor" />
-      <path d="M12 12L18.9282 16C20.0328 14.0871 19.1373 11.634 17.2244 10.5295C15.3115 9.42496 12.8584 10.3204 11.7538 12.2333L12 12Z" fill="currentColor" transform="rotate(120 12 12)" />
-      <path d="M12 12L5.0718 16C3.96726 17.9129 4.8627 20.366 6.7756 21.4705C8.6885 22.575 11.1416 21.6796 12.2462 19.7667L12 12Z" fill="currentColor" transform="rotate(240 12 12)" />
+      {/* Blade 1 (Top) */}
+      <path d="M13 10.5L13.5 0L9 2.5L11 10.5C11.6 10.2 12.4 10.2 13 10.5Z" fill="currentColor" />
+      {/* Blade 2 (Right) */}
+      <path d="M13 10.5L13.5 0L9 2.5L11 10.5C11.6 10.2 12.4 10.2 13 10.5Z" fill="currentColor" transform="rotate(120 12 12)" />
+      {/* Blade 3 (Left) */}
+      <path d="M13 10.5L13.5 0L9 2.5L11 10.5C11.6 10.2 12.4 10.2 13 10.5Z" fill="currentColor" transform="rotate(240 12 12)" />
     </motion.g>
-    <circle cx="12" cy="12" r="2" fill="currentColor" className="text-white mix-blend-difference"/>
   </svg>
 );
 

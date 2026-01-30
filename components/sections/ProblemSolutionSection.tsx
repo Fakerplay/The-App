@@ -11,7 +11,7 @@ export const ProblemSolutionSection: React.FC = () => {
       
       {/* Left Column: The Problem (Burnout) */}
       <div className={`grid content-center ${spacing.sectionPx} py-20 border-b md:border-b-0 md:border-r ${colors.border}`}>
-        <div className="max-w-xl w-full justify-self-center md:justify-self-start">
+        <div className="max-w-xl w-full justify-self-center md:justify-self-end md:pr-12 text-left">
             <TechnicalMono className="mb-6 text-red-500/70">01 // THE DIAGNOSIS</TechnicalMono>
             <h2 className={`font-sans text-3xl md:text-5xl font-light mb-8 ${colors.textPrimary} tracking-tight leading-[1.1]`}>
               Digital Burnout. <br/>
@@ -38,7 +38,7 @@ export const ProblemSolutionSection: React.FC = () => {
         {/* Subtle background glow */}
         <div className="absolute inset-0 bg-solace-cyan/5 opacity-50 pointer-events-none" />
         
-        <div className="max-w-xl w-full justify-self-center md:justify-self-end relative z-10">
+        <div className="max-w-xl w-full justify-self-center md:justify-self-start md:pl-12 relative z-10 text-left">
             <TechnicalMono className="mb-6 text-solace-cyan">02 // THE CURE</TechnicalMono>
             <h2 className={`font-sans text-3xl md:text-5xl font-light mb-8 ${colors.textPrimary} tracking-tight leading-[1.1]`}>
               The Pause. <br/>
