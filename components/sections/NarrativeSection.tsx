@@ -59,6 +59,7 @@ const NoiseTexture = () => {
 };
 
 const SystemStatus: React.FC = () => {
+  const { colors } = useTheme();
   const [index, setIndex] = useState(0);
   const states = [
     "SYSTEM: LISTENING",
@@ -94,7 +95,7 @@ const SystemStatus: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <TechnicalMono className="text-[10px] !text-black/70 tracking-widest">{states[index]}</TechnicalMono>
+            <TechnicalMono className={`text-[10px] ${colors.textSecondary} tracking-widest`}>{states[index]}</TechnicalMono>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -158,10 +159,6 @@ export const NarrativeSection: React.FC = () => {
 
            <SystemStatus />
         </motion.div>
-
-        <div className="absolute bottom-12 right-12 text-right">
-           <TechnicalMono className={`text-black/40 px-3 py-1.5 border ${colors.border} rounded-full`}>FIG B. THE SIGNAL</TechnicalMono>
-        </div>
       </div>
 
     </section>

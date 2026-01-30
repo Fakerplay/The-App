@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { DisplaySerif, TechnicalMono, BodyText } from '../ui/Typography';
 import { useTheme } from '../../context/ThemeContext';
+import { TimeOfDay } from '../../types';
 
 const CapabilityCard: React.FC<{ 
   id: string; 
@@ -10,7 +11,9 @@ const CapabilityCard: React.FC<{
   label: string;
   children: React.ReactNode 
 }> = ({ id, title, description, label, children }) => {
-  const { colors } = useTheme();
+  const { colors, timeOfDay } = useTheme();
+  const isNight = timeOfDay === TimeOfDay.NIGHT;
+  
   return (
     <motion.div 
       className="flex flex-col h-full group cursor-pointer"
@@ -25,11 +28,11 @@ const CapabilityCard: React.FC<{
           hover: { y: -8, scale: 1.02, boxShadow: "0 20px 40px -20px rgba(0,0,0,0.1)" } 
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className={`w-full aspect-square border-[0.5px] ${colors.border} ${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/5' : 'bg-[#FAFAFA]'} relative overflow-hidden flex items-center justify-center transition-all duration-500 mb-6`}
+        className={`w-full aspect-square border-[0.5px] ${colors.border} ${isNight ? 'bg-white/5' : 'bg-[#FAFAFA]'} relative overflow-hidden flex items-center justify-center transition-all duration-500 mb-6`}
       >
         
         {/* Background Technical Grid */}
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#000000 0.5px, transparent 0.5px)', backgroundSize: '24px 24px', opacity: 0.03 }} />
+        <div className="absolute inset-0" style={{ backgroundImage: `radial-gradient(${isNight ? '#FFFFFF' : '#000000'} 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px', opacity: 0.03 }} />
 
         {/* Content */}
         <div className="relative z-10 w-full h-full p-8 flex items-center justify-center">
@@ -90,7 +93,9 @@ const CapabilityCard: React.FC<{
 };
 
 export const ArchitectureSection: React.FC = () => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, timeOfDay } = useTheme();
+  const isNight = timeOfDay === TimeOfDay.NIGHT;
+  const visualBg = isNight ? 'bg-white' : 'bg-black';
 
   return (
     <section className={`w-full min-h-screen ${spacing.sectionPy} ${spacing.sectionPx} ${colors.background} flex flex-col justify-center border-b ${colors.border} relative transition-colors duration-500`}>
@@ -120,7 +125,7 @@ export const ArchitectureSection: React.FC = () => {
              <div className="relative w-full h-full flex items-center justify-center bg-transparent">
                 <div className="absolute inset-0 overflow-hidden opacity-20">
                    {Array.from({length: 15}).map((_, i) => (
-                      <div key={i} className={`absolute w-[2px] h-[2px] ${colors.textPrimary === 'text-[#E5E5E5]' ? 'bg-white' : 'bg-black'} rounded-full`} 
+                      <div key={i} className={`absolute w-[2px] h-[2px] ${visualBg} rounded-full`} 
                         style={{
                            top: Math.random() * 100 + '%',
                            left: Math.random() * 100 + '%'
@@ -139,7 +144,7 @@ export const ArchitectureSection: React.FC = () => {
                         {Array.from({length: 9}).map((_, i) => (
                             <motion.div 
                                 key={i}
-                                className={`w-1 h-1 ${colors.textPrimary === 'text-[#E5E5E5]' ? 'bg-white' : 'bg-black'}`}
+                                className={`w-1 h-1 ${visualBg}`}
                                 animate={{ opacity: [0.2, 1, 0.2] }}
                                 transition={{ duration: 1.5 + Math.random(), repeat: Infinity, ease: "easeInOut" }}
                             />
@@ -148,12 +153,12 @@ export const ArchitectureSection: React.FC = () => {
                 </div>
 
                  <motion.div 
-                   className="absolute w-36 h-36 border border-dashed border-black/20 rounded-full"
+                   className={`absolute w-36 h-36 border border-dashed ${isNight ? 'border-white/20' : 'border-black/20'} rounded-full`}
                    animate={{ rotate: 360 }}
                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                 />
                  <motion.div 
-                   className="absolute w-44 h-44 border-[0.5px] border-black/5 rounded-full"
+                   className={`absolute w-44 h-44 border-[0.5px] ${isNight ? 'border-white/5' : 'border-black/5'} rounded-full`}
                    animate={{ rotate: -360 }}
                    transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
                 />
@@ -187,7 +192,7 @@ export const ArchitectureSection: React.FC = () => {
                 {[0, 1, 2].map((i) => (
                   <motion.div
                      key={i}
-                     className="absolute border border-black/40 rounded-full"
+                     className={`absolute border ${isNight ? 'border-white/40' : 'border-black/40'} rounded-full`}
                      initial={{ width: 10, height: 10, opacity: 0.8 }}
                      animate={{ width: 180, height: 180, opacity: 0 }}
                      transition={{ duration: 3, delay: i * 0.8, repeat: Infinity, ease: "easeOut" }}
@@ -206,7 +211,7 @@ export const ArchitectureSection: React.FC = () => {
                 {Array.from({ length: 8 }).map((_, i) => (
                    <motion.div 
                      key={i}
-                     className="w-2 bg-black/20"
+                     className={`w-2 ${isNight ? 'bg-white/20' : 'bg-black/20'}`}
                      animate={{ height: [20, 60, 20], opacity: [0.3, 0.7, 0.3] }}
                      transition={{ duration: 1 + Math.random(), repeat: Infinity, delay: i * 0.1 }}
                    />

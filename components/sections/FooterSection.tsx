@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import { DisplaySerif, TechnicalMono } from '../ui/Typography';
 import { ArrowRight, Lock } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
+import { TimeOfDay } from '../../types';
 
 const PatternBlock: React.FC = () => {
   const { colors } = useTheme();
   return (
-    <div className={`flex gap-2 md:gap-3 h-32 items-end mb-24 opacity-50 mix-blend-multiply ${colors.textPrimary}`}>
+    <div className={`flex gap-2 md:gap-3 h-32 items-end mb-24 opacity-50 ${colors.textPrimary}`}>
       {Array.from({ length: 16 }).map((_, i) => (
         <motion.div 
           key={i} 
@@ -45,10 +46,11 @@ const PatternBlock: React.FC = () => {
 };
 
 export const FooterSection: React.FC = () => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, timeOfDay } = useTheme();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
   const isValid = email.includes('@') && email.includes('.');
+  const isNight = timeOfDay === TimeOfDay.NIGHT;
 
   // Helper to extract hex color
   const getHexColor = (bgClass: string) => {
@@ -93,7 +95,7 @@ export const FooterSection: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === 'success'}
-              className={`w-full bg-black/5 border ${colors.border} py-4 px-6 font-mono text-sm ${colors.textPrimary} placeholder-black/30 focus:outline-none focus:border-solace-cyan/40 focus:bg-white transition-all duration-300 rounded-sm text-center`}
+              className={`w-full ${isNight ? 'bg-white/10 placeholder-white/30' : 'bg-black/5 placeholder-black/30'} border ${colors.border} py-4 px-6 font-mono text-sm ${colors.textPrimary} focus:outline-none focus:border-solace-cyan/40 focus:bg-white focus:text-black transition-all duration-300 rounded-sm text-center`}
             />
             <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-30">
               <Lock size={14} className={colors.textPrimary} />

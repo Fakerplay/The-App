@@ -18,6 +18,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose })
     colors
   } = useTheme();
 
+  const isNight = timeOfDay === TimeOfDay.NIGHT;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -37,7 +39,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose })
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`fixed right-0 top-0 h-full w-full md:w-[400px] ${colors.background === 'bg-[#0A0A0A]' ? 'bg-[#111] border-l border-white/10' : 'bg-white border-l border-black/5'} z-[100] p-8 shadow-2xl overflow-y-auto transition-colors duration-500`}
+            className={`fixed right-0 top-0 h-full w-full md:w-[400px] ${isNight ? 'bg-[#111] border-l border-white/10' : 'bg-white border-l border-black/5'} z-[100] p-8 shadow-2xl overflow-y-auto transition-colors duration-500`}
           >
             <div className="flex justify-between items-center mb-12">
               <TechnicalMono className="!text-sm">SYSTEM CONFIGURATION</TechnicalMono>
@@ -66,8 +68,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose })
                         onClick={() => setTimeOfDay(theme.id)}
                         className={`flex flex-col items-center justify-center p-4 rounded-sm border transition-all duration-300 ${
                           isActive 
-                            ? `border-black/40 ${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/10 border-white/40' : 'bg-black/5'}` 
-                            : `border-transparent hover:bg-black/5 ${colors.background === 'bg-[#0A0A0A]' ? 'hover:bg-white/5' : ''}`
+                            ? `border-black/40 ${isNight ? 'bg-white/10 border-white/40' : 'bg-black/5'}` 
+                            : `border-transparent hover:bg-black/5 ${isNight ? 'hover:bg-white/5' : ''}`
                         }`}
                       >
                         <theme.icon size={20} className={`mb-2 ${colors.textPrimary} ${!isActive && 'opacity-40'}`} />
@@ -93,7 +95,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose })
                       onClick={() => setFontSize(size)}
                       className={`flex-1 py-2 text-[10px] font-mono uppercase tracking-wider transition-all duration-300 rounded-sm z-10 ${
                          fontSize === size 
-                           ? `${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/20 text-white' : 'bg-white text-black shadow-sm'}` 
+                           ? `${isNight ? 'bg-white/20 text-white' : 'bg-white text-black shadow-sm'}` 
                            : `${colors.textSecondary} opacity-60 hover:opacity-100`
                       }`}
                     >
@@ -116,7 +118,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose })
                         onClick={() => setLayoutDensity(density)}
                         className={`flex items-center justify-between p-4 border rounded-sm transition-all duration-300 ${
                            layoutDensity === density
-                             ? `${colors.border} ${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/5' : 'bg-black/5'}`
+                             ? `${colors.border} ${isNight ? 'bg-white/5' : 'bg-black/5'}`
                              : 'border-transparent hover:border-black/5'
                         }`}
                       >

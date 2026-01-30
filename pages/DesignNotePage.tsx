@@ -2,9 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { DisplaySerif, TechnicalMono, BodyText } from '../components/ui/Typography';
 import { useTheme } from '../context/ThemeContext';
+import { TimeOfDay } from '../types';
 
 export const DesignNotePage: React.FC = () => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, timeOfDay } = useTheme();
+  const isNight = timeOfDay === TimeOfDay.NIGHT;
 
   const visualSystems = [
     {
@@ -76,11 +78,11 @@ export const DesignNotePage: React.FC = () => {
                     <motion.div 
                         key={idx}
                         whileHover={{ y: -5 }}
-                        className={`flex flex-col gap-6 p-8 border ${colors.border} ${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/5' : 'bg-black/5'}`}
+                        className={`flex flex-col gap-6 p-8 border ${colors.border} ${isNight ? 'bg-white/5' : 'bg-black/5'}`}
                     >
                          <div className="flex justify-between items-center">
                             <TechnicalMono className="opacity-40">{item.category}</TechnicalMono>
-                            <div className={`w-2 h-2 rounded-full ${colors.background === 'bg-[#0A0A0A]' ? 'bg-white/20' : 'bg-black/20'}`} />
+                            <div className={`w-2 h-2 rounded-full ${isNight ? 'bg-white/20' : 'bg-black/20'}`} />
                          </div>
                          
                          <div>
